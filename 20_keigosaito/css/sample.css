@@ -1,0 +1,162 @@
+html{
+    font-size: 62.5%;
+     /* デフォルトのフォントサイズは16pxこれをremで指定しやすくするために10pxに変換しておく */
+}
+
+body {
+    font-family:"Open Sans",'ヒラギノ角ゴ ProN W3', Hiragino Kaku Gothic ProN, "メイリオ", Meiryo, sans-serif;
+    font-size: 1.6rem;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: white;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+header{
+    text-align: center;
+}
+
+.title{
+    font-size: 2.4rem;
+    text-align:center;
+    padding: 20px 0px;
+    font-weight: bold;
+}
+
+.setumei{
+    font-size: 1.2rem;
+    line-height: 1.5;
+    padding: 0px 0px 40px 0px ;
+}
+
+.start_btn{
+    text-align: center;
+    padding: 20px 0px;
+    font-size: 2.4rem;
+    width: 250px;
+    margin: 0 auto;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+
+}
+
+.start_btn:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.zan_coin{
+    text-align: center;
+    padding: 20px 0px;
+    font-size: 2.4rem;
+    width: 250px;
+    margin: 0 auto;
+}
+
+#start{
+    animation:BLINK 1s ease-in-out infinite alternate;
+}
+    @keyframes BLINK {0%{opacity:1.0;}100% {opacity:0;}}
+
+.start_coin{
+    display: none;
+}
+
+.bet_stage{
+    display: none;
+}
+
+.btn_reset{
+    font-size: 1rem;
+    text-align:right;
+    text-align: center;
+    list-style-type:none;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 0px 10px 10px 10px;
+    width: 100px;
+    float: right;
+}
+
+.btn_reset:hover{
+ background: #000;
+ color: #fff;
+}
+
+.btn_janken{
+    font-size: 2rem;
+    text-align:right;
+    text-align: center;
+    list-style-type:none;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 50px auto 10px auto;
+    width: 200px;
+    float: center;
+
+}
+
+.btn_janken:hover{
+    background-color: #0066CC;
+}
+.result{
+    display: none;
+    width: 300px;
+
+    margin: 0px auto;
+}
+
+.result h3{
+    font-weight: bold;
+    margin: 20px 0px;
+    text-align: center;
+}
+
+
+
+ul{
+    padding: 0;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    text-align: center;
+    list-style-type:none;
+    border: 2px solid #fff;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+    padding: 10px;
+}
+li:hover{
+    background: #0066CC;
+    color:#fff;
+}
+
+.board{
+
+}
+
+.board_count{
+    float: left;
+
+
+}
+
+footer{
+    text-align: center;
+}

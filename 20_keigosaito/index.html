@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">じゃんけんゲーム</h1>
+  <p class="setumei">
+    コンピュータと「じゃんけん」で対決！</br>
+    あなたは、グー、チョキ、パー、それぞれにコインを賭けよう。</br>
+    勝てば２倍、あいこと負けはコインが没収されます。
+  </p>
+</header>
+
+<main>
+  <div class="start_btn" id="btn_start">
+    <span id="start">100円を入れてね</span>
+  </div>
+  <div id="start_coin" class="zan_coin">  </div>
+
+  <div class="bet_stage" id="id_bet_stage">
+  <div class="btn_reset" id="reset">賭け数をリセットする</div>
+
+    <ul>
+      <li id="gu_btn" >グー</li>
+      <li id="cho_btn">チョキ</li>
+      <li id="par_btn">パー</li>
+    </ul>
+    <div class="btn_janken" id="janken">じゃんけんする</div>
+  </div>
+
+<div class="result" id="id_result">
+    <h3>コンピュータの出した手は？</h3>
+    <dl id="board">
+      <dt id="count" class="board_count">回数：</dt>
+      <dd id="judgment" class="board_judgment">出した手</dd>
+    </dl>
+</div> 
+  
+</main>
+
+<script>
+
+//利用する変数の宣言
+let n = 0;
+let bet_gu = 0;
+let bet_cyo = 0;
+let bet_pa = 0;
+let coin = 0;
+
+// コインの枚数を表示
+$('#start').click(function() {
+  coin = 3;
+  $('#btn_start').hide();
+  $('#start_coin').html('残コイン'+ coin + '枚');
+  $('#id_bet_stage').show();
+})
+
+// リセットボタンのときの処理
+$('#reset').click(function() {
+  $('#gu_btn').html('グー');
+  $('#cho_btn').html('チョキ');
+  $('#par_btn').html('パー');
+
+  coin = coin + bet_gu + bet_cyo + bet_pa;
+  bet_gu = 0;
+  bet_cyo = 0;
+  bet_pa = 0;
+
+  $('#start_coin').html('残コイン'+ coin + '枚');
+
+})
+
+// グーボタンを押したときの処理
+$('#gu_btn').click(function() {
+    // コイン枚数の引き算
+    coin = coin - 1 
+    if(coin < 0){
+      $('#start_coin').html('コインがありません');
+    }else{
+      bet_gu += 1; 
+      $('#gu_btn').html('グー　×'+ bet_gu + '枚');
+      $('#start_coin').html('残コイン'+ coin + '枚');
+    }
+
+})
+      
+    
+// チョキボタンを押したときの処理
+$('#cho_btn').click(function() {
+    // コイン枚数の引き算
+    coin = coin - 1 
+    if(coin < 0){
+      $('#start_coin').html('コインがありません');
+    }else{
+      bet_cyo += 1; 
+      $('#cho_btn').html('チョキ　×'+ bet_cyo + '枚');
+      $('#start_coin').html('残コイン'+ coin + '枚');
+    }
+
+})
+
+// パーボタンを押したときの処理
+$('#par_btn').click(function() {
+
+  // コイン枚数の引き算
+  coin = coin - 1 
+  if(coin < 0){
+    $('#start_coin').html('コインがありません');
+  }else{
+    bet_pa += 1; 
+    $('#par_btn').html('パー　×'+ bet_pa + '枚');
+    $('#start_coin').html('残コイン'+ coin + '枚');
+  }
+})
+
+// じゃんけんボタン
+
+$('#janken').click(function() {
+  if(0 >= bet_pa && 0 >= bet_cyo && 0 >= bet_gu){
+  alert('グー、チョキ、パーのどれかにコインを賭けてね');
+  }else{
+    $('#id_result').show();
+    const hand = Math.ceil(Math.random()*3);
+    // グー
+      if(hand==1){
+        // 残コイン計算
+        coin = coin + bet_pa*2;
+
+        if(coin <= 0){
+          $('#start_coin').html('コインがありません');
+          $('#janken').html('ゲームオーバー');
+        }else{
+          // 回数カウント
+          n = n + 1;
+          $('#board').after('<dl><dt class="board_count">'+ n + '回目：</dt><dd class="board_judgment">グー</dd></dl>');
+          $('#gu_btn').html('グー');
+          $('#cho_btn').html('チョキ');
+          $('#par_btn').html('パー');
+          bet_gu = 0;
+          bet_cyo = 0;
+          bet_pa = 0;
+          $('#start_coin').html('残コイン'+ coin + '枚');
+        }
+
+      }
+      // チョキ
+      if(hand==2){
+        
+
+        // 残コイン計算
+        coin = coin + bet_gu*2;
+        if(coin <= 0){
+          $('#start_coin').html('コインがありません');
+          $('#janken').html('ゲームオーバー');
+        }else{
+          // 回数カウント
+          n = n + 1;
+          $('#board').after('<dl><dt class="board_count">'+ n + '回目：</dt><dd class="board_judgment">チョキ</dd></dl>');
+          
+          // 表示の更新
+          $('#gu_btn').html('グー');
+          $('#cho_btn').html('チョキ');
+          $('#par_btn').html('パー');
+          bet_gu = 0;
+          bet_cyo = 0;
+          bet_pa = 0;
+          $('#start_coin').html('残コイン'+ coin + '枚');      }
+      }
+      // パー
+      if(hand==3){
+        
+      
+        // 残コイン計算
+        coin = coin + bet_cyo*2;
+        if(coin <= 0){
+          $('#start_coin').html('コインがありません');
+          $('#janken').html('ゲームオーバー');
+
+        }else{
+          // 回数カウント
+          n = n + 1;
+          $('#board').after('<dl><dt class="board_count">'+ n + '回目：</dt><dd class="board_judgment">パー</dd></dl>');
+          // 表示の更新 
+          $('#gu_btn').html('グー');
+          $('#cho_btn').html('チョキ');
+          $('#par_btn').html('パー');
+          bet_gu = 0;
+          bet_cyo = 0;
+          bet_pa = 0;
+          $('#start_coin').html('残コイン'+ coin + '枚');
+        }
+      }
+  }
+})
+
+
+
+</script>
+</body>
+</html>
